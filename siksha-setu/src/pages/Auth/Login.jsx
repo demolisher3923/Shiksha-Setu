@@ -54,34 +54,41 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+        <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+      </div>
+
+      <div className="max-w-md w-full space-y-8 relative z-10">
         {/* Header */}
-        <div className="text-center">
+        <div className="text-center fade-in-up">
           <div className="flex justify-center">
-            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-3 rounded-full">
-              <BookOpen className="h-8 w-8 text-white" />
+            <div className="bg-gradient-to-r from-cyan-400 to-blue-500 p-4 rounded-2xl shadow-lg">
+              <BookOpen className="h-10 w-10 text-white" />
             </div>
           </div>
-          <h2 className="mt-6 text-3xl font-bold text-gray-900">
-            Welcome back to Shiksha Setu
+          <h2 className="mt-8 text-4xl font-black text-white">
+            Welcome back to <span className="gradient-text">Shiksha Setu</span>
           </h2>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-4 text-lg text-gray-300">
             Sign in to continue your learning journey
           </p>
         </div>
 
         {/* Login Form */}
-        <div className="bg-white/70 backdrop-blur-sm rounded-xl shadow-lg p-8">
+        <div className="glass-effect rounded-2xl shadow-2xl p-8 border border-white/20">
           <form className="space-y-6" onSubmit={handleSubmit}>
             {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-sm font-semibold text-gray-300 mb-2">
                 Email Address
               </label>
-              <div className="mt-1 relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-gray-400" />
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Mail className="h-5 w-5 text-cyan-400" />
                 </div>
                 <input
                   id="email"
@@ -91,7 +98,7 @@ const Login = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                  className="block w-full pl-12 pr-4 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all duration-300"
                   placeholder="Enter your email"
                 />
               </div>
@@ -99,12 +106,12 @@ const Login = () => {
 
             {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-sm font-semibold text-gray-300 mb-2">
                 Password
               </label>
-              <div className="mt-1 relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-gray-400" />
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Lock className="h-5 w-5 text-cyan-400" />
                 </div>
                 <input
                   id="password"
@@ -114,18 +121,18 @@ const Login = () => {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="block w-full pl-10 pr-10 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                  className="block w-full pl-12 pr-12 py-4 bg-white/10 border border-white/20 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:border-cyan-400 transition-all duration-300"
                   placeholder="Enter your password"
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <EyeOff className="h-5 w-5 text-gray-400 hover:text-cyan-400 transition-colors duration-300" />
                   ) : (
-                    <Eye className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <Eye className="h-5 w-5 text-gray-400 hover:text-cyan-400 transition-colors duration-300" />
                   )}
                 </button>
               </div>
@@ -138,14 +145,14 @@ const Login = () => {
                   id="remember-me"
                   name="remember-me"
                   type="checkbox"
-                  className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                  className="h-4 w-4 text-cyan-500 focus:ring-cyan-400 bg-white/10 border-white/20 rounded transition-colors duration-300"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
+                <label htmlFor="remember-me" className="ml-3 block text-sm text-gray-300 font-medium">
                   Remember me
                 </label>
               </div>
               <div>
-                <a href="#" className="text-sm text-indigo-600 hover:text-indigo-500">
+                <a href="#" className="text-sm text-cyan-400 hover:text-cyan-300 transition-colors duration-300 font-medium">
                   Forgot password?
                 </a>
               </div>
@@ -156,26 +163,26 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:-translate-y-1 hover:shadow-lg"
+                className="group relative w-full flex justify-center py-4 px-6 border border-transparent text-lg font-bold rounded-xl text-white bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-offset-2 focus:ring-offset-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover-lift shadow-lg"
               >
                 {isLoading ? (
                   <div className="flex items-center">
-                    <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent mr-2"></div>
+                    <div className="animate-spin rounded-full h-6 w-6 border-2 border-white border-t-transparent mr-3"></div>
                     Signing in...
                   </div>
                 ) : (
-                  'Sign in'
+                  'Sign In'
                 )}
               </button>
             </div>
 
             {/* Sign Up Link */}
             <div className="text-center">
-              <p className="text-sm text-gray-600">
+              <p className="text-gray-300">
                 Don't have an account?{' '}
                 <Link
                   to="/register"
-                  className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
+                  className="font-semibold text-cyan-400 hover:text-cyan-300 transition-colors duration-300"
                 >
                   Sign up for free
                 </Link>
@@ -185,11 +192,15 @@ const Login = () => {
         </div>
 
         {/* Demo Credentials */}
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-          <h3 className="text-sm font-medium text-yellow-800 mb-2">Demo Credentials:</h3>
-          <div className="text-xs text-yellow-700 space-y-1">
-            <div><strong>Student:</strong> student@demo.com / password123</div>
-            <div><strong>Teacher:</strong> teacher@demo.com / password123</div>
+        <div className="glass-effect border border-yellow-400/20 rounded-xl p-6">
+          <h3 className="text-lg font-bold text-yellow-400 mb-4">Demo Credentials:</h3>
+          <div className="text-gray-300 space-y-2">
+            <div className="p-3 bg-white/5 rounded-lg">
+              <span className="text-cyan-400 font-semibold">Student:</span> student@demo.com / password123
+            </div>
+            <div className="p-3 bg-white/5 rounded-lg">
+              <span className="text-cyan-400 font-semibold">Teacher:</span> teacher@demo.com / password123
+            </div>
           </div>
         </div>
       </div>

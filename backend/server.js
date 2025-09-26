@@ -55,12 +55,15 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/shiksha-setu', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/shiksha-setu')
+.then(() => {
+  console.log('MongoDB connected successfully');
 })
-.then(() => console.log('MongoDB connected successfully'))
-.catch((err) => console.error('MongoDB connection error:', err));
+.catch((err) => {
+  console.error('MongoDB connection error:', err);
+  console.log('Note: Make sure MongoDB is installed and running on your system');
+  console.log('You can still test the frontend without MongoDB - API calls will fail gracefully');
+});
 
 // Socket.IO for real-time features
 io.on('connection', (socket) => {
