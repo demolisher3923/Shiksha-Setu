@@ -52,6 +52,18 @@ export const fetchLearningAnalytics = createAsyncThunk(
   }
 );
 
+export const fetchUserProgress = createAsyncThunk(
+  'progress/fetchUserProgress',
+  async (userId, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`/progress/user/${userId}`);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const initialState = {
   overview: {
     stats: {
@@ -149,6 +161,19 @@ const progressSlice = createSlice({
       // Fetch Learning Analytics
       .addCase(fetchLearningAnalytics.fulfilled, (state, action) => {
         state.analytics = action.payload;
+      })
+      // Fetch User Progress
+      .addCase(fetchUserProgress.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserProgress.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.overview = action.payload;
+      })
+      .addCase(fetchUserProgress.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });

@@ -50,6 +50,18 @@ export const fetchWeeklyChampions = createAsyncThunk(
   }
 );
 
+export const fetchLeaderboard = createAsyncThunk(
+  'leaderboard/fetchLeaderboard',
+  async (params = {}, { rejectWithValue }) => {
+    try {
+      const response = await api.get('/leaderboard', { params });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data.message);
+    }
+  }
+);
+
 const initialState = {
   globalLeaderboard: [],
   subjectLeaderboard: [],
@@ -135,6 +147,20 @@ const leaderboardSlice = createSlice({
       // Fetch Weekly Champions
       .addCase(fetchWeeklyChampions.fulfilled, (state, action) => {
         state.weeklyChampions = action.payload.champions;
+      })
+      // Fetch Leaderboard
+      .addCase(fetchLeaderboard.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(fetchLeaderboard.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.globalLeaderboard = action.payload.leaderboard || action.payload;
+        state.pagination = action.payload.pagination;
+      })
+      .addCase(fetchLeaderboard.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });
